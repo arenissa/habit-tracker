@@ -90,6 +90,7 @@
 
 ## Ссылки
 
+- **Онлайн-версия (публикация):** https://arenissa.github.io/habit-tracker/
 - Репозиторий: https://github.com/arenissa/habit-tracker
 - ТЗ и правила серий: [spec.md](spec.md) · Тест-кейсы: [test-cases.md](test-cases.md)
-- Запуск: `python -m http.server 8000` → http://localhost:8000 (подробности — в README).
+- Локальный запуск: `python -m http.server 8177` → http://localhost:8177 (подробности — в README).
