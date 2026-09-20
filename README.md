@@ -7,6 +7,7 @@
 - **Экраны:** «Сегодня», «Календарь привычки», «Создание/редактирование».
 - **Правила серий и пропусков:** [docs/spec.md](docs/spec.md).
 - **Тест-кейсы:** [docs/test-cases.md](docs/test-cases.md).
+- **Кейс проекта:** [docs/case-study.md](docs/case-study.md).
 - **Правила для ИИ-агента:** [AGENTS.md](AGENTS.md).
 
 ## Запуск
