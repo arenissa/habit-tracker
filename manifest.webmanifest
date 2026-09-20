@@ -1,0 +1,20 @@
+{
+  "name": "Трекер привычек",
+  "short_name": "Привычки",
+  "description": "Минималистичный трекер привычек: отметка одним касанием, серии и прогресс.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#10131a",
+  "theme_color": "#10131a",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
