@@ -2,14 +2,20 @@ import { getHabits, getActiveHabits } from './habits.js';
 import { markSetByHabit, toggleMark } from './marks.js';
 import { currentStreak, bestStreak } from './streak.js';
 import { todayLocal } from './dates.js';
+import { exportData, importData } from './transfer.js';
 import { esc } from './util.js';
+
+let notice = '';
 
 export function mountToday(root, { show }) {
   const today = todayLocal();
   const active = getActiveHabits();
   const archived = getHabits().filter((h) => h.archived);
 
-  root.innerHTML = header('Сегодня') + (active.length === 0
+  const banner = notice ? `<div class="banner">${esc(notice)}</div>` : '';
+  notice = '';
+
+  root.innerHTML = header('Сегодня') + banner + (active.length === 0
     ? `
       <div class="empty">
         <div class="empty__icon">🌿</div>
@@ -19,7 +25,7 @@ export function mountToday(root, { show }) {
     : `
       <ul class="habit-list">
         ${active.map((habit) => row(habit, today)).join('')}
-      </ul>`) + (archived.length > 0 ? archiveBlock(archived, today) : '');
+      </ul>`) + (archived.length > 0 ? archiveBlock(archived, today) : '') + dataActions();
 
   root.querySelectorAll('[data-row]').forEach((el) => {
     const habitId = el.dataset.row;
@@ -42,6 +48,37 @@ export function mountToday(root, { show }) {
       toggle.textContent = `Архив (${archived.length}) ${open ? '›' : '⌄'}`;
     });
   }
+
+  const exportBtn = root.querySelector('[data-export]');
+  if (exportBtn) exportBtn.addEventListener('click', exportData);
+
+  const importBtn = root.querySelector('[data-import]');
+  const importInput = root.querySelector('[data-import-input]');
+  if (importBtn && importInput) {
+    importBtn.addEventListener('click', () => importInput.click());
+    importInput.addEventListener('change', async () => {
+      const file = importInput.files[0];
+      importInput.value = '';
+      if (!file) return;
+      try {
+        const result = await importData(file);
+        notice = `Импортировано: привычек — ${result.habits}, новых отметок — ${result.marks}.`;
+      } catch {
+        notice = 'Не удалось прочитать файл: ожидается JSON, экспортированный из приложения.';
+      }
+      show('today');
+    });
+  }
+}
+
+function dataActions() {
+  return `
+    <section class="data-actions">
+      <button class="link-btn" data-export>Экспорт</button>
+      <span class="data-actions__sep">·</span>
+      <button class="link-btn" data-import>Импорт</button>
+      <input type="file" accept=".json,application/json" hidden data-import-input>
+    </section>`;
 }
 
 function archiveBlock(archived, today) {

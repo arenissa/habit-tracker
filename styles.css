@@ -419,3 +419,24 @@ button {
   color: var(--muted);
   margin: 10px 0;
 }
+
+.data-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 26px;
+}
+
+.data-actions__sep {
+  color: var(--muted);
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 8px 10px;
+  cursor: pointer;
+}

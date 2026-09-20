@@ -1,4 +1,4 @@
-const CACHE = 'habit-tracker-v1';
+const CACHE = 'habit-tracker-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const ASSETS = [
   './js/habits.js',
   './js/marks.js',
   './js/streak.js',
+  './js/transfer.js',
   './js/ui-today.js',
   './js/ui-calendar.js',
   './js/ui-habit-form.js',
